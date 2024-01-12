@@ -1,0 +1,136 @@
+.musicboxCont {
+    width: 100%;
+    border: 1px solid;
+    border-radius: var(--border-radius-def);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: border-color 0.5s ease-in-out, box-shadow 0.5s ease;
+}
+
+.musicboxCont:hover{
+    box-shadow: var(--box-shadow-def);
+}
+
+.musicboxCont h2 {
+    margin: 0;
+    padding: 0;
+    font-size: var(--fs-medium);
+    font-weight: var(--fw-bold);
+    transition: color 0.5s ease-in-out;
+}
+
+.musicbox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.mholder {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+.mholder .playbutton {
+    width: 15%;
+    border: 1px solid var(--color-gold);
+    border-radius: var(--border-radius-def);
+    font-size: var(--fs-regular);
+    cursor: pointer;
+    height: 3.125rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    translate: 25px;
+    transition: border-color 0.5s ease-in-out, color 0.3s ease-in, background-color 0.3s ease-out, font-size 0.3s ease-in-out;
+}
+
+.mholder .playbutton:hover {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+    font-size: calc(var(--fs-big) - 0.4rem);
+}
+
+.mholder .trackinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 75%;
+    height: 3.125rem;
+}
+
+.mholder .trackInfoText {
+    transition: color 0.5s ease-in-out;
+}
+
+.mholder .volume {
+    transform: rotate(270deg);
+    margin: 0;
+    height: 100%;
+    display: flex;
+}
+
+.mholder .volume input {
+    width: 3.125rem;
+    transform: translateY(-0.75rem);
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    margin: 0;
+}
+
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+.mholder input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--color-red);
+    border-radius: var(--border-radius-def);
+}
+  
+/******** Firefox ********/
+.mholder input[type="range"]::-moz-range-track {
+    background: var(--color-red);
+    border-radius: var(--border-radius-def);
+}
+
+/***** Thumb Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+.mholder input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    background-color: var(--color-gold);
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: var(--border-radius-def);
+}
+
+/******** Firefox ********/
+.mholder input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    background-color: var(--color-gold);
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: var(--border-radius-def);
+}
+
+.songSelect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+    height: 3.125rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-def);
+    transition: color 0.5s ease-in-out, font-size 0.3s ease-in;
+}
+
+.songSelect:hover{
+    color: var(--color-red);
+    font-size: calc(var(--fs-medium) - 0.2rem);
+}

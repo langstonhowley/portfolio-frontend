@@ -1,0 +1,53 @@
+:root {
+  --color-gray-background: rgb(45,45,45);
+  --color-gray-background-oscuro: rgba(45,45,45,45);
+  --color-gray-background-lighter: rgba(255, 255, 255, 0.377);
+  --color-modal-background: rgba(69, 69, 69, 0.69);
+  --color-black: rgb(0,0,0);
+  --color-gold: rgb(255, 215, 0);
+  --color-gold-oscuro: rgba(255, 217, 0, 0.566);
+  --color-gold-more-oscuro: rgba(255, 217, 0, 0.30);
+  --color-white: rgb(255, 255, 255);
+  --color-red: rgb(255, 0, 0);
+  --color-green: rgb(0, 255, 0);
+
+  --fw-thin: 200;
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --fw-extra-bold: 1000;
+
+  --fs-small: 0.75rem;
+  --fs-nav-link: 0.9rem;
+  --fs-regular: 1.0rem;
+  --fs-medium: 1.5rem;
+  --fs-big: 2.0rem;
+
+  --border-radius-def: 15px;
+  --box-shadow-def: 0rem 0.1875rem 0.9375rem 0.06rem var(--color-gold-more-oscuro);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  background-color: var(--color-gray-background);
+}
+
+body {
+  background: var(--color-gray-background);
+  font-family: 'Nunito', sans-serif;
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-regular);
+  color: var(--color-white);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*, *::before, *::after{
+  box-sizing: border-box;
+}

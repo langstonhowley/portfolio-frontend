@@ -1,0 +1,196 @@
+.modalHolder{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-modal-background);
+    z-index: 9;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    width: 60%;
+    height: 70%;
+    background: var(--color-gray-background);
+    border: 1px solid var(--color-white);
+    border-radius: var(--border-radius-def);
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal h2 {
+    margin: 0;
+    padding: 0;
+    font-size: var(--fs-medium)
+}
+
+.xIcon {
+    height: 1.2rem;
+    position: relative;
+    top: 0.625rem;
+    left: 47%;
+    transition: all 500ms ease-in-out;
+    color: white;
+}
+
+.xIcon:hover{
+    color: var(--color-gold);
+    height: 1.3rem;
+}
+
+.modalInner {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.emailHolder {
+    width: 100%;
+    height: 1.875rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.emailHolder input {
+    text-align: center;
+    width: 70%;
+    height: 1.3rem;
+    background-color: #454545;
+    border: 1px solid var(--color-gray-background-lighter);
+    border-radius: var(--border-radius-def);
+    outline: none;
+    text-decoration: none;
+    color: var(--color-white);
+    font-size: var(--fs-regular);
+    font-weight: var(--fw-bold);
+    transition: background-color 0.5s ease-in, color 0.5s ease-out, font-size 0.5s ease-in, height 0.5s ease-in-out;
+}
+
+.emailHolder input:focus, .emailHolder input:active,  .emailHolder input:hover{
+    background-color: rgba(255, 217, 0, 0.241);
+    height: 2rem;
+    font-size: var(--fs-medium);
+    color: black;
+}
+
+.emailEntry{
+    width: 80%;
+    height: 60%;
+    background-color: #454545;
+    border: 1px solid var(--color-white);
+    border-radius: var(--border-radius-def);
+    color: var(--color-white);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background-color 0.5s ease-in, color 0.5s ease-in;
+}
+
+.modal textarea {
+    padding: 10px;
+    margin: 0;
+    width: 95%;
+    height: 70%;
+    background: transparent;
+    background-color: #454545; 
+    border: 1px solid rgba(255, 255, 255, 0.377);
+    border-radius: var(--border-radius-def);
+    text-decoration: none;
+    resize: none;
+    outline: none;
+    color: var(--color-white);
+    transition: background-color 0.5s ease-in, color 0.5s ease-in, font-size 0.5s ease-out;
+}
+
+.modal textarea:focus,  .modal textarea:hover{
+    background-color: rgba(255, 217, 0, 0.241);
+    font-size: var(--fs-regular);
+    color: black;
+}
+
+.sendButton {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.send {
+    background-color: #454545;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-bold);
+    color: var(--color-white);
+    border: 1px solid var(--color-white);
+    border-radius: var(--border-radius-def);
+    width: 20%;
+    height: 70%;
+    transition: all 500ms ease-in-out;
+}
+
+.send:hover{
+    font-size: var(--fs-medium);
+    background-color: var(--color-gold-oscuro)
+}
+
+
+@media screen and (max-width: 82.5rem) {
+    .modal {
+        width: 80%;
+    }
+
+    .modal h2 {
+        font-size: var(--fs-regular)
+    }
+
+    .xIcon {
+        height: 1rem;
+        left: 40%;
+    }
+
+    .send {
+        font-size: var(--fs-small);
+        width: 100%;
+    }
+
+    .emailHolder {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .emailHolder input:focus, .emailHolder input:active,  .emailHolder input:hover{
+        background-color: rgba(255, 217, 0, 0.241);
+        height: 2rem;
+        font-size: var(--fs-small);
+        color: black;
+    }
+
+    .emailHolder input {
+        width: 95%;
+        height: 2rem;
+        font-size: var(--fs-small);
+    }
+
+    .modal textarea {
+        margin-bottom: 20px;
+    }
+}
+

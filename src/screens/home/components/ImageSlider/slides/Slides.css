@@ -1,0 +1,83 @@
+:root {
+    --color-slides-background-default: #0E1117;
+    --color-slides-text-background: #45454590;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+    background-color: var(--color-slides-background-default);
+}
+
+.slide img, .slide p {
+    animation: fadeIn 1s ease-in-out;
+    cursor: pointer;
+}
+
+.textDiv {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-slides-text-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.textDiv p {
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-regular);
+    width: 80%;
+}
+
+.imgDiv {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.imgDiv img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.leftBig, .rightBig {
+    width: 80%;   
+}
+
+.rightSmall, .leftSmall {
+    width: 20%;
+}
+
+
+@media screen and (max-width: 82.5rem) {
+    .leftBig, .rightBig {
+        width: 70%;
+    }
+    
+    .rightSmall, .leftSmall {
+        width: 30%;
+    }
+
+    .textDiv p {
+        font-size: var(--fs-small);
+    }
+}

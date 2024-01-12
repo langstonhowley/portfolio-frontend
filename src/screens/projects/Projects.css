@@ -1,0 +1,126 @@
+.container2 {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.container2 h2 {
+    margin: 1.25rem 0 1.25rem 0;
+    padding: 0;
+}
+
+.arrowDiv {
+    height: 2.5rem;
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@keyframes arrowDance {
+    0% {
+      transform: translateY(-20px);
+      color: var(--color-white);
+    }
+    50% {
+        transform: translateY(0);
+        color: var(--color-gold);
+    }
+    100% {
+        transform: translateY(-20px);
+        color: var(--color-white);
+    }
+}
+
+.arrow {
+    height: 2rem;
+    color: var(--color-white);
+    animation: arrowDance 1s ease-in-out 10 forwards;
+}
+
+.slideCont {
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+    justify-items: center;
+    align-items: center;
+    margin-top: 0.8rem;
+    margin-bottom: 10rem;
+}
+
+.project-slide {
+    opacity: 0;
+    align-self: flex-start;
+    height: 45rem;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    animation: slideInFromLeft 1s ease forwards;
+    animation-timeline: view(y);
+    animation-range-start: 12.5rem;
+    animation-range-end: 43.75rem;
+    border: 1px solid white;
+    border-radius: 15px;
+}
+
+.project-slide:nth-child(odd){
+    align-self: flex-end;
+    animation: slideInFromRight 1s ease forwards;
+    animation-timeline: view(y);
+    animation-range-start: 12.5rem;
+    animation-range-end: 43.75rem;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(500px);
+        scale: 0.5;
+        opacity: 0;
+    }
+    50% {
+        border-color: blue;
+    }
+    75% {
+        scale: 1;
+        border-color: red;
+    }
+    80% {
+        transform: translateX(0px);
+        border-color: white;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(-500px);
+        scale: 0.5;
+        opacity: 0;
+    }
+    50% {
+        border-color: blue;
+    }
+    75% {
+        scale: 1;
+        border-color: red;
+    }
+    80% {
+        transform: translateX(0px);
+        border-color: white;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
+

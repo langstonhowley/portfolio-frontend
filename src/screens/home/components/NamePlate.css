@@ -1,0 +1,80 @@
+.nameplate {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    border: 1px solid var(--color-gold);
+    border-radius: var(--border-radius-def);
+    margin-top: 1.25rem;
+    position: relative;
+    transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease;
+}
+
+.nameplate:hover {
+    box-shadow: var(--box-shadow-def);
+}
+
+.nameplate > p {
+    color: white;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-200);
+}
+
+.langstonImgCont {
+    position: relative;
+    height: 20.8125rem;
+    width: 100%;
+}
+
+.langstonIMG {
+    border-radius: var(--border-radius-def);
+    height: 100%;
+}
+
+.langstonIMGoverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: var(--color-gold-oscuro);
+    border-radius: var(--border-radius-def);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.langstonIMGoverlay:hover {
+    opacity: 0.25;
+}
+
+.langstonIMGoverlay > p {
+    color: black;
+    font-size: var(--fs-regular);
+    font-weight: var(--fw-thin);
+}
+
+.site-title{
+    color: var(--color-gold);
+    font-size: var(--fs-big);
+    font-weight: var(--fw-extra-bold);
+}
+
+@media screen and (max-width: 82.5rem) {
+    .nameplate {
+        width: 23rem;
+    }
+
+    .nameplate > p {
+        color: white;
+        font-size: calc(var(--fs-small) - 0.2rem);
+        font-weight: var(--fw-200);
+    }
+}
+

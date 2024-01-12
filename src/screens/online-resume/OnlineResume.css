@@ -1,0 +1,16 @@
+.resumeCont {
+    margin-top: 1.125rem;
+    width: 90%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0.5rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.resumeCont img {
+    width: 100%;
+}

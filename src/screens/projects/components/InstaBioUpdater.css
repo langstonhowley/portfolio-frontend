@@ -1,0 +1,28 @@
+.instaCont .imageHolder{
+    width: 65%;
+    height: 100%;
+
+    background-color: #121212;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.instaCont .imageHolder img {
+    width: 100%;
+}
+
+.instaCont .desc-grid-item-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    text-align: center;
+}
+
+.instaCont .desc-grid-item-3 p{
+    font-size: var(--fs-big);
+    font-weight: var(--fs-bold);
+}
