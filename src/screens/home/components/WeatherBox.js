@@ -28,7 +28,7 @@ const WeatherBox = () => {
     const [failedWeatherReqCount, setFailed] = useState(0)
     
     useEffect(() => {
-        if(process.env.NODE_ENV !== 'development'){  
+        if(process.env.NODE_ENV === 'development'){  
             let w = {
                 "coord": {
                     "lon": 10.99,
@@ -83,7 +83,7 @@ const WeatherBox = () => {
             setWeatherIconUrl('https://openweathermap.org/img/wn/' + w.weather[0].icon + '@2x.png')
         }else {
             if (failedWeatherReqCount < 2){
-                axios.post(process.env.REACT_APP_BACKEND_BASE_URL + '/weather', {city:locations[currentLocationIdx]})
+                axios.post('/weather', {city:locations[currentLocationIdx]})
                 .then(res => {
                     setWeather(res.data)
                     setWeatherIconUrl('https://openweathermap.org/img/wn/' + res.data.weather[0].icon + '@2x.png')
