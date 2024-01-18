@@ -28,7 +28,7 @@ const WeatherBox = () => {
     const [failedWeatherReqCount, setFailed] = useState(0)
     
     useEffect(() => {
-        if(process.env.NODE_ENV === 'development'){  
+        if(process.env.NODE_ENV !== 'development'){  
             let w = {
                 "coord": {
                     "lon": 10.99,

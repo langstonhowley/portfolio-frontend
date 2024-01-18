@@ -6,6 +6,7 @@ import Links from './screens/Links';
 import Home from './screens/home/Home';
 import Projects from './screens/projects/Projects';
 import OnlineResume from './screens/online-resume/OnlineResume';
+import NotFound from './screens/not-found/NotFound';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="projects" element={<Projects />} />
             <Route path="resume" element={<OnlineResume />} />
+            <Route path="*" element={<NotFound/>} />
           </Route>
         </Routes>
       </BrowserRouter>
