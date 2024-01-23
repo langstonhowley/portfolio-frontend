@@ -14,7 +14,7 @@ const EmailModal = (props) => {
 
     const sendEmail = () => {
         if(emailFrom && emailValidationRegex.test(emailFrom)){
-            axios.post(process.env.REACT_APP_BACKEND_BASE_URL + '/email', {from:emailFrom, message:email})
+            axios.post('/email', {from:emailFrom, message:email})
             .then(res => {
                 setError(null)
                 setStep("end")
