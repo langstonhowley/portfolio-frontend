@@ -2,6 +2,28 @@ import { React, useEffect, useState, useCallback, useMemo } from "react";
 import "./Synthesizer.css";
 
 const Synthesizer = () => {
+  // Screen size monitoring because we can't render for screens too small
+  const [isMobileWidth, setIsMobileWidth] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const screenWidthInPixels = window.innerWidth;
+      console.log(screenWidthInPixels);
+
+      if (screenWidthInPixels <= 1320) {
+        setIsMobileWidth(true);
+      } else {
+        setIsMobileWidth(false);
+      }
+    };
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
   const [audioContext, setAudioContext] = useState(null);
   const [oscillators, setOscillators] = useState({});
   const [octave, setOctave] = useState(4);
@@ -445,12 +467,16 @@ const Synthesizer = () => {
         style={{
           opacity: isFocused ? 0 : 1,
           color: isFocused ? "green" : "red",
+          display: isMobileWidth ? "none" : "block",
         }}
         className="clickToPlay"
       >
         Power: {isFocused ? "ON" : "OFF [CLICK TO PLAY]"}
       </p>
-      <div className="synthControlsHolder">
+      <div
+        className="synthControlsHolder"
+        style={{ display: isMobileWidth ? "none" : "grid" }}
+      >
         <div className="synthTitleHolder">Jynthesizer</div>
         <div className="controls">
           <div className="c1">
@@ -529,6 +555,9 @@ const Synthesizer = () => {
         </div>
         <div className="piano-roll">{pianoKeyElements}</div>
       </div>
+      <h2 style={{ display: isMobileWidth ? "block" : "none" }}>
+        Jynthesizer Cannot be used at your screen width.
+      </h2>
     </div>
   );
 };

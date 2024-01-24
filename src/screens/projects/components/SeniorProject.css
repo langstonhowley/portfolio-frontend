@@ -124,3 +124,13 @@
     object-fit: contain;
     object-position: top;
 }
+
+@media screen and (max-width: 82.5rem) {
+    .sp-main .description {
+        width: 80%;
+    }
+
+    .desc-grid-item-2 {
+        padding: 0.05rem;
+    }
+}

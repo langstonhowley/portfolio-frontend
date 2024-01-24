@@ -26,3 +26,14 @@
     font-size: var(--fs-big);
     font-weight: var(--fs-bold);
 }
+
+@media screen and (max-width: 82.5rem) {
+    .instaCont .description {
+        width: 93%;
+    }
+
+    .instaCont .description img {
+        width: 100%;
+        height: 100%;
+    }
+}
