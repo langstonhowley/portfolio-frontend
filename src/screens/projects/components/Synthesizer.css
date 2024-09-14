@@ -13,6 +13,17 @@
     font-family: 'Genos';
 }
 
+.typeToPlay {
+    position: absolute;
+
+    top: 5%;
+    left: 73%;
+    transition: opacity 1s ease-in-out 1s, color 0.4s ease-in;
+
+    font-size: var(--fs-medium);
+    font-family: 'Genos';
+}
+
 .synthCont{
     position: relative;
     z-index: 5;
@@ -53,8 +64,16 @@
     gap: 1em;
 }
 
+.controls .control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--color-gold-oscuro);
+    border-radius: var(--border-radius-def);
+}
 
-.c1, .c2 {
+.c1, .c2, .c3 {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -63,28 +82,9 @@
     padding: 1em;
 }
 
-.controls .c1 .volume {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: var(--color-gold-oscuro);
-    border-radius: var(--border-radius-def);
-}
-
-.controls .c2 .volume {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: var(--color-gold-oscuro);
-    border-radius: var(--border-radius-def);
-}
-
-
 .piano-roll {
     display: flex;
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: var(--border-radius-def);
 }
 
@@ -98,18 +98,18 @@
 }
 
 .white-key {
-    background-color: white;
+    background-color: var(--color-white);
     color: var(--color-black);
 }
 
 .black-key {
-    background-color: black;
-    color: white;
+    background-color: var(--color-black);
+    color: var(--color-white);
     position: relative;
     z-index: 1;
 }
 
 .key-pressed {
     background-color: var(--color-gold);
-    color: black;
+    color: var(--color-black);
 }

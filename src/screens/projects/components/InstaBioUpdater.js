@@ -7,7 +7,6 @@ const InstaBioUpdater = () => {
   useEffect(() => {
     const checkScreenSize = () => {
       const screenWidthInPixels = window.innerWidth;
-      console.log(screenWidthInPixels);
 
       if (screenWidthInPixels <= 1320) {
         setIsMobileWidth(true);

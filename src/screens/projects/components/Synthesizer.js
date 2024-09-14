@@ -7,7 +7,6 @@ const Synthesizer = () => {
   useEffect(() => {
     const checkScreenSize = () => {
       const screenWidthInPixels = window.innerWidth;
-      console.log(screenWidthInPixels);
 
       if (screenWidthInPixels <= 1320) {
         setIsMobileWidth(true);
@@ -26,14 +25,18 @@ const Synthesizer = () => {
 
   const [audioContext, setAudioContext] = useState(null);
   const [oscillators, setOscillators] = useState({});
-  const [octave, setOctave] = useState(4);
-  const [volume, setVolume] = useState(0);
   const [attack, setAttack] = useState(0.3);
   const [decay, setDecay] = useState(0.7);
   const [detune, setDetune] = useState(0.0);
   const [isFocused, setIsFocused] = useState(false);
   const [pianoKeyElements, setPianoKeyElements] = useState([]);
+
+  const [octave, setOctave] = useState(4);
+  const [volume, setVolume] = useState(0);
   const [waveIdx, setWaveIdx] = useState(0);
+
+  const [subVolume, setSubVolume] = useState(0);
+  const [subWaveIdx, setSubWaveIdx] = useState(0);
 
   const waveTypes = useMemo(() => {
     return ["triangle", "sine", "square", "sawtooth"];
@@ -182,7 +185,15 @@ const Synthesizer = () => {
       const keyboardKeyArray = Object.keys(keyboardKeyToNote);
       const keyIdx = keyboardKeyArray.indexOf(key);
       const frequency = keyboardKeyFrequencyMap[key + "" + octave];
+
       if (!frequency) return;
+      var frequency2 = null;
+
+      if (octave > 1) {
+        frequency2 = keyboardKeyFrequencyMap[key + "" + (octave - 1)];
+      } else {
+        frequency2 = keyboardKeyFrequencyMap[key + "" + octave];
+      }
 
       // Detune
       var nextFrequency = frequency;
@@ -210,15 +221,26 @@ const Synthesizer = () => {
         frequency;
 
       const playFrequency = parseFloat(
-        (frequency + (nextFrequency - frequency) * Math.abs(detune)).toFixed(2)
+        frequency + (nextFrequency - frequency) * Math.abs(detune)
       );
 
+      const playFrequency2 = parseFloat(frequency2);
+
       const oscillator = audioContext.createOscillator();
+      const oscillator2 = audioContext.createOscillator();
+      const oscillator3 = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
+      const gainNode2 = audioContext.createGain();
 
       oscillator.type = waveTypes[waveIdx];
       oscillator.frequency.setValueAtTime(
         playFrequency,
+        audioContext.currentTime
+      );
+
+      oscillator3.type = waveTypes[subWaveIdx];
+      oscillator3.frequency.setValueAtTime(
+        playFrequency2,
         audioContext.currentTime
       );
 
@@ -229,15 +251,22 @@ const Synthesizer = () => {
         audioContext.currentTime + attack
       );
 
+      gainNode2.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode2.gain.linearRampToValueAtTime(
+        subVolume,
+        audioContext.currentTime + attack
+      );
+
       // Decay
-      const releaseEndTime = audioContext.currentTime + attack + decay;
+      const releaseEndTime = audioContext.currentTime + attack + 0.5 + decay;
       gainNode.gain.linearRampToValueAtTime(0, releaseEndTime);
+      gainNode2.gain.linearRampToValueAtTime(0, releaseEndTime);
 
       gainNode.connect(audioContext.destination);
       oscillator.connect(gainNode);
+      oscillator.start();
 
       if (detune !== 0) {
-        const oscillator2 = audioContext.createOscillator();
         oscillator2.type = waveTypes[waveIdx];
         oscillator2.frequency.setValueAtTime(
           frequency,
@@ -247,7 +276,9 @@ const Synthesizer = () => {
         oscillator2.start();
       }
 
-      oscillator.start();
+      gainNode2.connect(audioContext.destination);
+      oscillator3.connect(gainNode2);
+      oscillator3.start();
 
       setOscillators((prevOscillators) => ({
         ...prevOscillators,
@@ -265,6 +296,8 @@ const Synthesizer = () => {
       volume,
       waveTypes,
       waveIdx,
+      subWaveIdx,
+      subVolume
     ]
   );
 
@@ -451,6 +484,16 @@ const Synthesizer = () => {
     setWaveIdx(parseInt(e.target.value));
   };
 
+  const handleSubWaveChange = (e) => {
+    document.getElementById("synth").focus();
+    setSubWaveIdx(parseInt(e.target.value));
+  };
+
+  const handleSubVolumeChange = (e) => {
+    document.getElementById("synth").focus();
+    setSubVolume(parseFloat(e.target.value));
+  };
+
   const handleAttackChange = (e) => {
     document.getElementById("synth").focus();
     setAttack(parseFloat(e.target.value));
@@ -460,6 +503,9 @@ const Synthesizer = () => {
     document.getElementById("synth").focus();
     setDecay(parseFloat(e.target.value));
   };
+
+  const volMin = 0
+  const volMax = 0.4
 
   return (
     <div className="project-slide synthCont" id="synth" tabIndex="0">
@@ -480,12 +526,25 @@ const Synthesizer = () => {
         <div className="synthTitleHolder">Jynthesizer</div>
         <div className="controls">
           <div className="c1">
-            <div className="volume">
-              <p>Volume: {Math.floor((volume / 0.4) * 100)}%</p>
+            <div className="control">
+              <p>Wave 1: {waveTypes[waveIdx].toUpperCase()}</p>
               <input
                 type="range"
-                min="0.01"
-                max="0.4"
+                min="0"
+                max="3"
+                step="1"
+                value={waveIdx}
+                onChange={handleWaveChange}
+                onFocus={handleWaveChange}
+                tabIndex="1"
+              />
+            </div>
+            <div className="control">
+              <p>Volume: {Math.floor((volume / volMax) * 100)}%</p>
+              <input
+                type="range"
+                min={volMin}
+                max={volMax}
                 step="0.01"
                 value={volume}
                 onChange={handleVolumeChange}
@@ -493,7 +552,35 @@ const Synthesizer = () => {
                 tabIndex="1"
               />
             </div>
-            <div className="volume">
+          </div>
+          <div className="c2">
+            <div className="control">
+              <p>Attack: {Math.floor(attack * 100)}%</p>
+              <input
+                type="range"
+                min="0.01"
+                max="1"
+                step="0.01"
+                value={attack}
+                onChange={handleAttackChange}
+                onFocus={handleAttackChange}
+                tabIndex="1"
+              />
+            </div>
+            <div className="control">
+              <p>Decay: {Math.floor(decay * 100)}%</p>
+              <input
+                type="range"
+                min="0.01"
+                max="1"
+                step="0.01"
+                value={decay}
+                onChange={handleDecayChange}
+                onFocus={handleDecayChange}
+                tabIndex="1"
+              />
+            </div>
+            <div className="control">
               <p>
                 Detune {detune >= 0 ? "+" : "-"}
                 {Math.floor((Math.abs(detune) / 0.25) * 100)}%
@@ -509,50 +596,45 @@ const Synthesizer = () => {
                 tabIndex="1"
               />
             </div>
-            <div className="volume">
-              <p>Wave: {waveTypes[waveIdx].toUpperCase()}</p>
+          </div>
+          <div className="c3">
+            <div className="control">
+              <p>Wave 2: {waveTypes[subWaveIdx].toUpperCase()}</p>
               <input
                 type="range"
                 min="0"
                 max="3"
                 step="1"
-                value={waveIdx}
-                onChange={handleWaveChange}
-                onFocus={handleWaveChange}
+                value={subWaveIdx}
+                onChange={handleSubWaveChange}
+                onFocus={handleSubWaveChange}
+                tabIndex="1"
+              />
+            </div>
+            <div className="control">
+              <p>Wave 2 Volume: {Math.floor((subVolume / volMax) * 100)}%</p>
+              <input
+                type="range"
+                min={volMin}
+                max={volMax}
+                step="0.01"
+                value={subVolume}
+                onChange={handleSubVolumeChange}
+                onFocus={handleSubVolumeChange}
                 tabIndex="1"
               />
             </div>
           </div>
-          <div className="c2">
-            <div className="volume">
-              <p>Attack: {Math.floor(attack * 100)}%</p>
-              <input
-                type="range"
-                min="0.01"
-                max="1"
-                step="0.01"
-                value={attack}
-                onChange={handleAttackChange}
-                onFocus={handleAttackChange}
-                tabIndex="1"
-              />
-            </div>
-            <div className="volume">
-              <p>Decay: {Math.floor(decay * 100)}%</p>
-              <input
-                type="range"
-                min="0.01"
-                max="1"
-                step="0.01"
-                value={decay}
-                onChange={handleDecayChange}
-                onFocus={handleDecayChange}
-                tabIndex="1"
-              />
-            </div>
-          </div>
-          <div className="c3"></div>
         </div>
+        <p
+          style={{
+            opacity: isFocused ? 0 : 1,
+            display: isMobileWidth ? "none" : "block",
+          }}
+          className="typeToPlay"
+        >
+          Use your keyboard to play.
+        </p>
         <div className="piano-roll">{pianoKeyElements}</div>
       </div>
       <h2 style={{ display: isMobileWidth ? "block" : "none" }}>
